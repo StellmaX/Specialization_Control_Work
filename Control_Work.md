@@ -357,49 +357,49 @@ mysql\> CREATE TABLE YoungAnimals AS
 
 	\-\> SELECT
 
-    \-\>   ID,
+	\-\>   ID,
 
-    \-\>   Name,
+	\-\>   Name,
 
-    \-\>   Type,
+	\-\>   Type,
 
-    \-\>   BirthDate,
+	\-\>   BirthDate,
 
-    \-\>   Commands,
+	\-\>   Commands,
 
-    \-\>   FLOOR(DATEDIFF(CURDATE(), BirthDate) / 30) AS AgeInMonths
+	\-\>   FLOOR(DATEDIFF(CURDATE(), BirthDate) / 30) AS AgeInMonths
 
-    \-\> FROM
+	\-\> FROM
 
-    \-\>   Pets
+	\-\>   Pets
 
-    \-\> WHERE
+	\-\> WHERE
 
-    \-\>   DATEDIFF(CURDATE(), BirthDate) BETWEEN 365 AND 1095
+	\-\>   DATEDIFF(CURDATE(), BirthDate) BETWEEN 365 AND 1095
 
-    \-\> UNION ALL
+	\-\> UNION ALL
 
-    \-\> SELECT
+	\-\> SELECT
 
-    \-\>   ID,
+	\-\>   ID,
 
-    \-\>   Name,
+	\-\>   Name,
 
-    \-\>   Type,
+	\-\>   Type,
 
-    \-\>   BirthDate,
+	\-\>   BirthDate,
 
-    \-\>   Commands,
+	\-\>   Commands,
 
-    \-\>   FLOOR(DATEDIFF(CURDATE(), BirthDate) / 30) AS AgeInMonths
+	\-\>   FLOOR(DATEDIFF(CURDATE(), BirthDate) / 30) AS AgeInMonths
 
-    \-\> FROM
+	\-\> FROM
 
-    \-\>   PackAnimals
+	\-\>   PackAnimals
 
-    \-\> WHERE
+	\-\> WHERE
 
-    \-\>   DATEDIFF(CURDATE(), BirthDate) BETWEEN 365 AND 1095;
+	\-\>   DATEDIFF(CURDATE(), BirthDate) BETWEEN 365 AND 1095;
     
 Query OK, 3 rows affected (0,18 sec)
 
@@ -407,69 +407,69 @@ Records: 0  Duplicates: 0  Warnings: 0
 
 mysql\> CREATE TABLE AllAnimals AS
 
-    \-\> SELECT
+	\-\> SELECT
 
-    \-\>   ID,
+	\-\>   ID,
 
-    \-\>   Name,
+	\-\>   Name,
 
-    \-\>   Type,
+	\-\>   Type,
 
-    \-\>   BirthDate,
+	\-\>   BirthDate,
 
-    \-\>   Commands,
+	\-\>   Commands,
 
-    \-\>   FLOOR(DATEDIFF(CURDATE(), BirthDate) / 30) AS AgeInMonths,
+	\-\>   FLOOR(DATEDIFF(CURDATE(), BirthDate) / 30) AS AgeInMonths,
 
-    \-\>   'Pets' AS Source
+	\-\>   'Pets' AS Source
 
-    \-\> FROM
+	\-\> FROM
 
-    \-\>   Pets
+	\-\>   Pets
 
-    \-\> UNION ALL
+	\-\> UNION ALL
 
-    \-\> SELECT
+	\-\> SELECT
 
-    \-\>   ID,
+	\-\>   ID,
 
-    \-\>   Name,
+	\-\>   Name,
 
-    \-\>   Type,
+	\-\>   Type,
 
-    \-\>   BirthDate,
+	\-\>   BirthDate,
 
-    \-\>   Commands,
+	\-\>   Commands,
 
-    \-\>   FLOOR(DATEDIFF(CURDATE(), BirthDate) / 30) AS AgeInMonths,
+	\-\>   FLOOR(DATEDIFF(CURDATE(), BirthDate) / 30) AS AgeInMonths,
 
-    \-\>   'PackAnimals' AS Source
+	\-\>   'PackAnimals' AS Source
 
-    \-\> FROM
+	\-\> FROM
 
-    \-\>   PackAnimals
+	\-\>   PackAnimals
 
-    \-\> UNION ALL
+	\-\> UNION ALL
 
-    \-\> SELECT
+	\-\> SELECT
 
-    \-\>   ID,
+	\-\>   ID,
 
-    \-\>   Name,
+	\-\>   Name,
 
-    \-\>   Type,
+	\-\>   Type,
 
-    \-\>   BirthDate,
+	\-\>   BirthDate,
 
-    \-\>   Commands,
+	\-\>   Commands,
 
-    \-\>   FLOOR(DATEDIFF(CURDATE(), BirthDate) / 30) AS AgeInMonths,
+	\-\>   FLOOR(DATEDIFF(CURDATE(), BirthDate) / 30) AS AgeInMonths,
 
-    \-\>   'YoungAnimals' AS Source
+	\-\>   'YoungAnimals' AS Source
 
-    \-\> FROM
+	\-\> FROM
 
-    \-\>   YoungAnimals;
+	\-\>   YoungAnimals;
 
 Query OK, 16 rows affected (0,12 sec)
 ```
