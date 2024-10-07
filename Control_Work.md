@@ -257,4 +257,220 @@ User@User-VirtualBox:~$ history \> history.txt
 ```
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Объектно-ориентированное программирование
+
+```
+mysql\> CREATE DATABASE HumanFriends;
+
+Query OK, 1 row affected (0,11 sec)
+
+mysql\> USE HumanFriends;
+
+Database changed
+
+mysql\>	CREATE TABLE Pets (
+
+	\-\>    	ID INT AUTO\_INCREMENT PRIMARY KEY,
+
+	\-\>    	Name VARCHAR(50),
+
+	\-\>    	Type VARCHAR(20),
+
+	\-\>    	BirthDate DATE,
+
+	\-\>    	Commands TEXT
+
+	\-\>	);
+
+Query OK, 0 rows affected (0,29 sec)
+
+mysql\>
+
+mysql\>	CREATE TABLE PackAnimals (
+
+	\-\>    	ID INT AUTO\_INCREMENT PRIMARY KEY,
+
+	\-\>    	Name VARCHAR(50),
+
+	\-\>    	Type VARCHAR(20),
+
+	\-\>    	BirthDate DATE,
+
+	\-\>    	Commands TEXT
+
+	\-\>	);
+
+Query OK, 0 rows affected (0,25 sec)
+
+mysql\>    
+
+mysql\> INSERT INTO Pets (Name, Type, BirthDate, Commands) VALUES
+
+	\-\> ('Bobick', 'Dog', '2021-10-11', 'Sit, Stay, Play dead'),
+
+	\-\> ('Murzik', 'Cat', '2020-08-13', 'Sit, Jump, Down'),
+
+	\-\> ('Bak', 'Hamster', '2022-12-15', 'Play dead'),
+	
+	\-\> ('Nicole', 'Hamster', '2022-12-15', 'Down'),
+
+	\-\> ('Mukhtar', 'Dog', '2015-01-01', 'Bite, Drop it, Speak'),
+
+	\-\> ('Kesha', 'Cat', '2018-08-13', 'Paw, Wait, Heel'),
+
+	\-\> ('Zina', 'Dog', '2013-02-19', 'Speak, Stay, Wait'),
+
+	\-\> ('Marusya', 'Cat', '2016-09-22', 'Meow, Scratch, Jump');
+
+Query OK, 8 rows affected (0,15 sec)
+
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql\> INSERT INTO PackAnimals (Name, Type, BirthDate, Commands) VALUES
+
+	\-\> ('Coast', 'Horse', '2019-06-14', 'Gallop, Jump, Trot'),
+
+	\-\> ('Brick', 'Camel', '2018-11-28', 'Carry Load, Walk'),
+
+	\-\> ('Donkey', 'Donkey', '2019-04-13', 'Bray, Walk, Carry Load'),
+
+	\-\> ('Matilda', 'Horse', '2014-08-24', 'Gallop, Canter'),
+
+	\-\> ('Thorn', 'Camel', '2016-01-19', 'Walk, Down'),
+
+	\-\> ('Egor', 'Donkey', '2013-09-18', 'Stop, Walk, Bray'),
+
+	\-\> ('Wind', 'Horse', '2019-12-12', 'Back, Gallop, Walk'),
+
+	\-\> ('Pharaoh', 'Camel', '2012-02-17', 'Down, Walk');
+
+Query OK, 8 rows affected (0,06 sec)
+
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql\> DELETE FROM PackAnimals WHERE Type \= 'Camel';
+
+Query OK, 3 rows affected (0,02 sec)
+
+mysql\> CREATE TABLE YoungAnimals AS
+
+    \-\> SELECT
+
+    \-\>   ID,
+
+    \-\>   Name,
+
+    \-\>   Type,
+
+    \-\>   BirthDate,
+
+    \-\>   Commands,
+
+    \-\>   FLOOR(DATEDIFF(CURDATE(), BirthDate) / 30) AS AgeInMonths
+
+    \-\> FROM
+
+    \-\>   Pets
+
+    \-\> WHERE
+
+    \-\>   DATEDIFF(CURDATE(), BirthDate) BETWEEN 365 AND 1095
+
+    \-\> UNION ALL
+
+    \-\> SELECT
+
+    \-\>   ID,
+
+    \-\>   Name,
+
+    \-\>   Type,
+
+    \-\>   BirthDate,
+
+    \-\>   Commands,
+
+    \-\>   FLOOR(DATEDIFF(CURDATE(), BirthDate) / 30) AS AgeInMonths
+
+    \-\> FROM
+
+    \-\>   PackAnimals
+
+    \-\> WHERE
+
+    \-\>   DATEDIFF(CURDATE(), BirthDate) BETWEEN 365 AND 1095;
+    
+Query OK, 3 rows affected (0,18 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql\> CREATE TABLE AllAnimals AS
+
+    \-\> SELECT
+
+    \-\>   ID,
+
+    \-\>   Name,
+
+    \-\>   Type,
+
+    \-\>   BirthDate,
+
+    \-\>   Commands,
+
+    \-\>   FLOOR(DATEDIFF(CURDATE(), BirthDate) / 30) AS AgeInMonths,
+
+    \-\>   'Pets' AS Source
+
+    \-\> FROM
+
+    \-\>   Pets
+
+    \-\> UNION ALL
+
+    \-\> SELECT
+
+    \-\>   ID,
+
+    \-\>   Name,
+
+    \-\>   Type,
+
+    \-\>   BirthDate,
+
+    \-\>   Commands,
+
+    \-\>   FLOOR(DATEDIFF(CURDATE(), BirthDate) / 30) AS AgeInMonths,
+
+    \-\>   'PackAnimals' AS Source
+
+    \-\> FROM
+
+    \-\>   PackAnimals
+
+    \-\> UNION ALL
+
+    \-\> SELECT
+
+    \-\>   ID,
+
+    \-\>   Name,
+
+    \-\>   Type,
+
+    \-\>   BirthDate,
+
+    \-\>   Commands,
+
+    \-\>   FLOOR(DATEDIFF(CURDATE(), BirthDate) / 30) AS AgeInMonths,
+
+    \-\>   'YoungAnimals' AS Source
+
+    \-\> FROM
+
+    \-\>   YoungAnimals;
+
+Query OK, 16 rows affected (0,12 sec)
+```
 Работу выполнял Стельмах Алексей Александрович, 04.10.24, 6378
