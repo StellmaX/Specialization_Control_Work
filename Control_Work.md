@@ -355,7 +355,7 @@ Query OK, 3 rows affected (0,02 sec)
 
 mysql\> CREATE TABLE YoungAnimals AS
 
-    \-\> SELECT
+	\-\> SELECT
 
     \-\>   ID,
 
